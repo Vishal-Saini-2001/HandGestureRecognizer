@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
-import { Hands } from '@mediapipe/hands';
+import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands';
 import { Camera } from '@mediapipe/camera_utils';
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 import './App.css';
@@ -21,7 +21,7 @@ function App() {
       canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
       if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         for (const landmarks of results.multiHandLandmarks) {
-          drawConnectors(canvasCtx, landmarks, Hands.HAND_CONNECTIONS, { color: '#00FF00', lineWidth: 5 });
+          drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, { color: '#97FC05', lineWidth: 8 });
           drawLandmarks(canvasCtx, landmarks, { color: '#FF0000', lineWidth: 2 });
         }
         detectGesture(results.multiHandLandmarks[0]);
@@ -134,7 +134,7 @@ function App() {
     const thumbTouchingPinky = Math.abs(landmarks[4].x - landmarks[20].x) < 0.05;
     return indexExtended && middleExtended && ringExtended && thumbTouchingPinky;
   };
-  
+
 
 
   return (
